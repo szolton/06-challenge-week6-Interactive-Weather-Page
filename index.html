@@ -11,26 +11,29 @@
     <h1>Weather Dashboard</h1>
     <div class="container">
         <div class="weather-input">
-            <h3>Enter a City Name</h3>
+            <header class="city-name-style"><h3>Enter a City Name</h3>
             <input class="city-input" type="text" placeholder="eg, New York, London, Tokyo">
             <button class="search-btn">Search</button>
             <div class="separator"></div>
             <button class="location-btn">Use Current Location</button>
+            <header class="weather-search-history"><h3>Recent Search History</h3></header>
+            <button class="recent-search-results"><ul class="history-list"></ul></button>
         </div>
 
         <div class="weather-data">
             <div class="current-weather">
                 <div class="details">
-                    <h2>London (03-13-2024)</h2>
-                    <h6>Temperature: 60°F</h6>
-                    <h6>Wind: 4.31 M/S</h6>
-                    <h6>Humidity: 79%</h6>
-
-                    <div class="icon">
-                        <img src="https://openweathermap.org/img/wn/10d@4x.png" alt="weather-icon">
+                    <div id="current-city-name"><header class="current-city-name" style="color: white;"><h2>London</h2></div>
+                        <header class="current-city-date"><h3>03-13-2024</h3></header>
+                        <h6>Temperature: 60°F</h6>
+                        <h6>Wind: 4.31 M/S</h6>
+                        <h6>Humidity: 79%</h6>
+                </div>
+                <div class="icon">
+                    <img src="https://openweathermap.org/img/wn/10d@4x.png" alt="weather-icon">
                         <h4>Moderate Rain</h4>
                     </div>
-                </div>
+                
             </div>
 
             <div class="days-forecast">
@@ -44,7 +47,7 @@
                     </li>
                     
                     <li class="card">
-                        <h3>(03-13-2024)</h3>
+                        <h3>03-13-2024</h3>
                         <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon">
                         <h6>Temp: 60°F</h6>
                         <h6>Wind: 4.31 M/S</h6>
@@ -52,7 +55,7 @@
                     </li>
 
                     <li class="card">
-                        <h3>(03-13-2024)</h3>
+                        <h3>03-13-2024</h3>
                         <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon">
                         <h6>Temp: 60°F</h6>
                         <h6>Wind: 4.31 M/S</h6>
@@ -60,7 +63,7 @@
                     </li>
 
                     <li class="card">
-                        <h3>(03-13-2024)</h3>
+                        <h3>03-13-2024</h3>
                         <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon">
                         <h6>Temp: 60°F</h6>
                         <h6>Wind: 4.31 M/S</h6>
@@ -68,7 +71,7 @@
                     </li>
 
                     <li class="card">
-                        <h3>(03-13-2024)</h3>
+                        <h3>03-13-2024</h3>
                         <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon">
                         <h6>Temp: 60°F</h6>
                         <h6>Wind: 4.31 M/S</h6>

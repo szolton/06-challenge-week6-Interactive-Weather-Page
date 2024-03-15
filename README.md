@@ -12,11 +12,9 @@ I followed the resources to create the Javascript, HTML, and CSS. Here are some 
 
 ![color-palette](./Assets/images/colors.png)
 
-Next, I updated it to create HTML and CSS to make a weather site with the mentioned teals and peaches.
+Next, I updated it to create HTML and CSS to make a weather site with the mentioned teals and peaches. Then, I updated the JavaScript. Here is a cool feature of making city, state and zip codes searchable as well, for ultimate accuracy.
 
 ![landing-page](./Assets/images/first-page.png)
-
-Then, I updated the JavaScript. Here is a cool feature of making city, state and zip codes searchable as well, for ultimate accuracy.
 
 ![zip-codes](./Assets/images/zip-codes.png)
 

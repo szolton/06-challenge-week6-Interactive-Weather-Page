@@ -121,7 +121,7 @@ const createWeatherCard = (cityName, weatherItem, index) => {
 const getWeatherDetails = (cityName, latitude, longitude) => {
 
     // construct the API URL using latitude and longitude
-    const WEATHER_API_URL = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
+    const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
 
     // fetch weather data from the API
     fetch(WEATHER_API_URL)

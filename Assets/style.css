@@ -157,13 +157,12 @@ h2 {
     flex-direction: column;
     position: relative;
     align-items: flex-end; /* Align items to the end (top in this case) */
-    /* margin-top: -180px; 
+    margin-top: -150px; /* Adjust margin-top to move the icon down */
     margin-bottom: -50px;
-    padding-top: 18px; */
+    padding-top: 18px;
     top: 0;
     right: 0;
 }
-
 .current-weather h6 {
     font-family: "FranklinGothic URW Book", Arial, Helvetica, sans-serif;
     font-size: 16px;
@@ -174,20 +173,23 @@ h2 {
     flex-direction: column;
     position: relative;
     align-items: flex-end;
-  
+    
     top: 0;
     right: 0;
+}
+
+.current-weather .icon img {
+    margin-top: 70px;
 }
 
 
 .current-weather .icon h4 {
     text-transform: capitalize;
     margin: auto;
-    margin-bottom: 20px;
+    padding-bottom: 30px;
     margin-right: auto;
     font-family: "Franklin Gothic Demi", Arial, Helvetica, sans-serif;
 }
-
 
 .days-forecast h2 {
     font-size: 1.5rem;

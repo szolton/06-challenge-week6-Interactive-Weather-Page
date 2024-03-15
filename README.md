@@ -26,6 +26,10 @@ Here is a cool feature of the current location button, it lets the user automati
 
 ![current-location](./Assets/images/location.png)
 
+The page is also responsive and works well on a mobile device.
+
+![mobile](./Assets/images/mobile-1.png) ![mobile](./Assets/images/mobile-2.png)
+
 In conclusion, I set up the quiz to meet the challenge requirements and improved it. I:
 - provided a weather dashboard with form inputs
 - you can search for any given city

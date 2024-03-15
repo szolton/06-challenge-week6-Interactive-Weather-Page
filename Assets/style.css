@@ -141,11 +141,12 @@ h2 {
 
 .current-weather .details {
     flex: 1; /* Take remaining space */
-    padding-top: -10px;
+    padding-top: -7px;
 }
 
 .current-weather {
     position: relative;
+    margin-top: -10px;
 }
 
 .current-city-name h2 {
@@ -173,7 +174,6 @@ h2 {
     flex-direction: column;
     position: relative;
     align-items: flex-end;
-    
     top: 0;
     right: 0;
 }
@@ -186,7 +186,7 @@ h2 {
 .current-weather .icon h4 {
     text-transform: capitalize;
     margin: auto;
-    padding-bottom: 30px;
+    padding-bottom: 40px;
     margin-right: auto;
     font-family: "Franklin Gothic Demi", Arial, Helvetica, sans-serif;
 }

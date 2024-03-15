@@ -15,21 +15,13 @@ h1 {
     text-align: center;
     padding: 18px 0;
     background: #28BBC2;
+    font-family: "Franklin Gothic Demi", Arial, Helvetica, sans-serif;
 
 }
 
 h2 {
     color: #28BBC2;
     font-family: "Franklin Gothic Demi", Arial, Helvetica, sans-serif;
-}
-
-h1 {
-    font-family: "Franklin Gothic Demi", Arial, Helvetica, sans-serif;
-
-}
-
-h6 {
-    font-family: "FranklinGothic URW Book", Arial, Helvetica, sans-serif;
 }
 
 .city-name-style {
@@ -123,13 +115,14 @@ h6 {
 
 .weather-data .current-weather {
     color: #fff;
-    background: #28BBC2;
+    background: linear-gradient(to bottom right, #28BBC2, #F4BD9E);
     border-radius: 5px;
     padding: 20px 70px 20px 20px;
     display: flex;
     justify-content: space-between; /* Align items to start and end */
     align-items: center; /* Center items vertically */
     max-width: 100%; /* Allow the content to take full width */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a drop shadow */
 }
 
 .current-weather h2 {
@@ -164,28 +157,35 @@ h6 {
     flex-direction: column;
     position: relative;
     align-items: flex-end; /* Align items to the end (top in this case) */
-    margin-top: -120px; 
-    padding-top: 20px;
+    /* margin-top: -180px; 
+    margin-bottom: -50px;
+    padding-top: 18px; */
     top: 0;
     right: 0;
 }
 
-.current-weather .icon img {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        align-items: flex-end; /* Align items to the end (top in this case) */
-        margin-top: 60px; /* Adjust the margin-top value as needed */
-        margin-left: 20px;
-        padding-top: 20px;
-        top: 0;
-        right: 0;
+.current-weather h6 {
+    font-family: "FranklinGothic URW Book", Arial, Helvetica, sans-serif;
+    font-size: 16px;
 }
 
+.current-weather .icon {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: flex-end;
+  
+    top: 0;
+    right: 0;
+}
+
+
 .current-weather .icon h4 {
-    margin-top: -10px;
     text-transform: capitalize;
-    margin-right: 30px;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-right: auto;
+    font-family: "Franklin Gothic Demi", Arial, Helvetica, sans-serif;
 }
 
 
@@ -194,9 +194,15 @@ h6 {
     margin: 20px 0;
 }
 
+.days-forecast h6 {
+    font-family: "FranklinGothic URW Book", Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
 .days-forecast .weather-cards  {
     display: flex;
     gap: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a drop shadow */
 }
 
 .weather-cards .card {
@@ -204,7 +210,7 @@ h6 {
     padding: 18px 16px;
     list-style: none;
     width: calc(100% / 5);
-    background: #F4BD9E; background: linear-gradient(to top, #88BFBF, #F4BD9E);
+    background: linear-gradient(to top, #88BFBF, #F4BD9E);
     border-radius: 5px;
 }
 
@@ -214,8 +220,7 @@ h6 {
 }
 
 .weather-cards .card img {
-    max-width: 70px;
-    margin: 5px 0 -12px 0;
+   margin-top: 20px;
 }
 
 .weather-search-history h3 {

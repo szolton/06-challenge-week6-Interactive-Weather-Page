@@ -43,6 +43,7 @@ const updateHistoryList = () => {
         });
     }
 };
+
 const createWeatherCard = (cityName, weatherItem, index) => {
     const kelvinToFahrenheit = kelvin => ((kelvin - 273.15) * 9/5 + 32).toFixed(2);
 
@@ -73,8 +74,6 @@ const createWeatherCard = (cityName, weatherItem, index) => {
 </li>`;
     }
 };
-
-
 
 const getWeatherDetails = (cityName, latitude, longitude) => {
     const WEATHER_API_URL = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
@@ -113,24 +112,115 @@ const getWeatherDetails = (cityName, latitude, longitude) => {
 };
 
 const getCityCoordinates = () => {
-    const cityName = cityInput.value.trim();
-    if (!cityName) return;
+    const input = cityInput.value.trim();
 
-    saveToHistory(cityName);
+    let queryParam = "";
+    if (!input) {
+        alert("Please enter a city name, zip code, or state name.");
+        return;
+    } else if (!isNaN(input)) {
+        // If input is a number, treat it as a zip code
+        queryParam = input;
+    } else if (input.includes(",")) {
+        // If input contains a comma, treat it as a city name and state code combination
+        const parts = input.split(",");
+        const city = parts[0].trim();
+        let stateCode = parts[1].trim();
+        // Check if the state code is an abbreviation, if so, convert it to full state name
+        const stateAbbreviations = {
+            AL: " Alabama ", 
+            AK: " Alaska ",
+            AZ: " Arizona",
+            AR: " Arkansas",
+            CA: " California",
+            CO: " Colorado",
+            CT: " Connecticut",
+            DE: " Delaware",
+            FL: " Florida",
+            GA: " Georgia",
+            HI: " Hawaii",
+            ID: " Idaho",
+            IL: " Illinois",
+            IN: " Indiana",
+            IA: " Iowa",
+            KS: " Kansas",
+            KY: " Kentucky",
+            LA: " Louisiana",
+            ME: " Maine",
+            MD: " Maryland",
+            MA: " Massachusetts",
+            MI: " Michigan",
+            MN: " Minnesota",
+            MS: " Mississippi",
+            MO: " Missouri",
+            MT: " Montana",
+            NE: " Nebraska",
+            NV: " Nevada",
+            NH: " New Hampshire",
+            NJ: " New Jersey",
+            NM: " New Mexico",
+            NY: " New York",
+            NC: " North Carolina",
+            ND: " North Dakota",
+            OH: " Ohio",
+            OK: " Oklahoma",
+            OR: " Oregon",
+            PA: " Pennsylvania",
+            RI: " Rhode Island",
+            SC: " South Carolina",
+            SD: " South Dakota",
+            TN: " Tennessee",
+            TX: " Texas",
+            UT: " Utah",
+            VT: " Vermont",
+            VA: " Virginia",
+            WA: " Washington",
+            WV: " West Virginia",
+            WI: " Wisconsin",
+            WY: " Wyoming"
+        };
+        stateCode = stateAbbreviations[stateCode.toUpperCase()] || stateCode;
+        queryParam = `${city},${stateCode}`;
+    } else {
+        // Otherwise, treat it as a city name or state name
+        queryParam = input;
+    }
 
-    const GEOCODING_API_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${API_KEY}`;
+    saveToHistory(input);
 
-    fetch(GEOCODING_API_URL)
-        .then(res => res.json())
-        .then(data => {
-            if (!data.length) return alert(`No coordinates found for ${cityName}`);
-            const { name, lat, lon } = data[0];
-            getWeatherDetails(name, lat, lon);
-        })
-        .catch(() => {
-            alert("An error occurred while fetching the coordinates!");
-        });
+    let API_URL = `https://api.zippopotam.us/us/${queryParam}`;
+    let isZipCode = false;
+
+    // Check if input is a zip code
+    if (!isNaN(input) && input.length === 5) {
+        isZipCode = true;
+    }
+
+    // If input is not a zip code, use the city name
+    if (!isZipCode) {
+        API_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${queryParam}&limit=5&appid=${API_KEY}`;
+    }
+
+    fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+        if (isZipCode) {
+            // Handle zip code search
+            const { latitude, longitude } = data.places[0];
+            getWeatherDetails(queryParam, latitude, longitude);
+        } else {
+            // Handle city name or state name search
+            const { lat, lon } = data[0];
+            getWeatherDetails(queryParam, lat, lon);
+        }
+    })
+    .catch(() => {
+        alert("An error occurred while fetching the coordinates!");
+    });
+
 };
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     updateHistoryList();
@@ -141,18 +231,7 @@ const getCurrentLocationWeather = () => {
     navigator.geolocation.getCurrentPosition(
         position => {
             const { latitude, longitude } = position.coords;
-
-            // gets the city name from coordinates using the reverse geocoding API
-            const API_URL = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=5&appid=${API_KEY}`;
-            fetch(API_URL)
-                .then(response => response.json())
-                .then(data => {
-                    const { name } = data[0];
-                    getWeatherDetails(name, latitude, longitude);
-                })
-                .catch(() => {
-                    alert("An error occurred while fetching the city name!");
-                });
+            getWeatherDetails("Your Location", latitude, longitude);
         },
         error => {
             if (error.code === error.PERMISSION_DENIED) {
@@ -166,22 +245,18 @@ const getCurrentLocationWeather = () => {
 };
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    updateHistoryList();
+    getCurrentLocationWeather(); // Automatically fetch current location weather
+});
+
+locationButton.addEventListener("click", getCurrentLocationWeather);
+
 locationButton.addEventListener("click", () => {
     navigator.geolocation.getCurrentPosition(
         position => {
             const { latitude, longitude } = position.coords;
-
-            // gets the city name from coordinates using the reverse geocoding API
-            const API_URL = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=5&appid=${API_KEY}`;
-            fetch(API_URL)
-                .then(response => response.json())
-                .then(data => {
-                    const { name } = data[0];
-                    getWeatherDetails(name, latitude, longitude);
-                })
-                .catch(() => {
-                    alert("An error occurred while fetching the city name!");
-                });
+            getWeatherDetails("Your Location", latitude, longitude);
         },
         error => {
             if (error.code === error.PERMISSION_DENIED) {
@@ -194,4 +269,18 @@ locationButton.addEventListener("click", () => {
     );
 });
 
-searchButton.addEventListener("click", getCityCoordinates);
+
+document.addEventListener("DOMContentLoaded", () => {
+    updateHistoryList();
+
+    cityInput.addEventListener("keypress", event => {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent the default form submission behavior
+            searchButton.click(); // Simulate a click on the search button
+        }
+    });
+    
+
+    searchButton.addEventListener("click", getCityCoordinates);
+    getCurrentLocationWeather(); // Automatically fetch current location weather
+});
